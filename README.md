@@ -14,7 +14,7 @@ This is because every-color works by taking the current epoch time and calculati
 
 **Specifically, you need to install the `coreutils` package through Homebrew**, which includes an updated version of `date`.
 
-[Here is Homebrew's homepage](brew.sh) which contains the basic instructions for installing Homebrew. Once you have it installed, type `brew install coreutils` into the command line and coreutils should be installed.
+[Here is Homebrew's homepage](https://brew.sh/) which contains the basic instructions for installing Homebrew. Once you have it installed, type `brew install coreutils` into the command line and coreutils should be installed.
 
 After that, simply **update the widget's index.coffee by commenting out the default command and then uncommenting the other command.**
 
