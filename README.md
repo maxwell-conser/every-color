@@ -28,6 +28,9 @@ update: (output, domEl) ->
 ````
 
 The faster version differs by calling the epoch time in nanoseconds using `gdate` and then cutting that down to deciseconds.
+````bash
+$(/usr/local/opt/coreutils/libexec/gnubin/date +%s%N | sed 's/........$//')
+````
 ## Making every-color Run Faster
 
 On it's default settings, every-color takes almost 200 days to cycle through all the colors. That's quite a long time.
