@@ -2,15 +2,37 @@
 
 # every-color
 
-**every-color** is an [Übersicht](https://github.com/felixhageloh/uebersicht) widget. It is a rectangle that slowly changes color to cover the entire RGB colorspace. In other words, over the course of ~20 days, this widget will display every single color your computer can muster.
+**every-color** is an [Übersicht](https://github.com/felixhageloh/uebersicht) widget. It is a modifiable rectangle that slowly changes color to cover the entire RGB colorspace. In other words, over the course of ~20 days, this widget will display every single color your computer can muster.
 
-every-color uses [unix epoch time](https://en.wikipedia.org/wiki/Unix_time) to set the color, so it should show the same color at the same time on any computer.
+every-color uses [unix epoch time](https://en.wikipedia.org/wiki/Unix_time) to set the color, so it shows the same color at the same time over multiple instances and on any computer.
 
+## How it works
+
+every-color works through a fairly simple process. In short, the command:
+1. takes the modulus of the current epoch time with respect to the total number of possible RGB colors (i.e. 256^3)
+````bash
+$(( $(date +%s) % 16777216 ))
+````
+2. converts that number to hexadecimal format
+````bash
+$(printf '%x\n' $(( $(date +%s) % 16777216 )))
+````
+3. echoes it back with a pound symbol
+````bash
+echo '#'$(printf '%x\n' $(( $(date +%s) % 16777216 )))
+````
+And then übersicht uses that as the updated background-color of the div.
+````coffeescript
+update: (output, domEl) ->
+  $(domEl).find('.swatch').css backgroundColor: output
+````
+
+The faster version differs by calling the epoch time in nanoseconds using `gdate` and then cutting that down to deciseconds.
 ## Making every-color Run Faster
 
 On it's default settings, every-color takes almost 200 days to cycle through all the colors. That's quite a long time.
 
-This is because every-color works by taking the current epoch time and calculating the RGB value from it. The default Apple `date` command only gives time to the nearest second so colors can only be updated once every second.
+This is because every-color works by taking the current epoch time and calculating an RGB value from it. The default Apple `date` command only gives time to the nearest second, so colors can only be updated once every second.
 
 **By installing an updated `date` utility, you can make every-color run faster.**
 
@@ -20,6 +42,6 @@ This is because every-color works by taking the current epoch time and calculati
 
 After that, simply **update the widget's index.coffee by commenting out the default command and then uncommenting the other command.**
 
-This new command changes the colors 10x faster. 
+This new command makes the colors change 10x faster, meaning it will cycle through every color in about 20 days. 
 
-By adding/deleting from the string of periods in the command you can change the speed by factors of 10. The limiting factor will probably be your monitor's refresh rate.
+By adding/deleting from the string of periods in the command you can change the speed by factors of 10. The limiting factor will be your monitor's refresh rate.
