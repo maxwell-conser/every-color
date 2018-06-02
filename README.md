@@ -1,3 +1,5 @@
+![color change example](gifcolor.gif)
+
 # every-color
 
 **every-color** is an [Übersicht](https://github.com/felixhageloh/uebersicht) widget. It is a rectangle that slowly changes color to cover the entire RGB colorspace. In other words, over the course of ~20 days, this widget will display every single color your computer can muster.
