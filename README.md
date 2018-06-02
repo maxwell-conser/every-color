@@ -1,4 +1,4 @@
-![color change example](gifcolor.gif)
+![color change example](screenshot.gif)
 
 # every-color
 
