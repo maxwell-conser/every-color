@@ -4,7 +4,7 @@
 # It will take almost 200 days to cycle through every color.
 
 # DEFAULT COMMAND:
-command: "echo '#'$(printf '%x\n' $(( $(date +%s) % 16777216)))"
+command: "echo '#'$(printf '%06x\n' $(( $(date +%s) % 16777216)))"
 
 
 # The below command cycles through every color in about 20 days. 
@@ -14,7 +14,7 @@ command: "echo '#'$(printf '%x\n' $(( $(date +%s) % 16777216)))"
 # Detailed instructions and explanation can be found at https://git.io/vhWtT
 
 # FASTER COMMAND:
-#command: "echo '#'$(printf '%x\n' $(( $(/usr/local/opt/coreutils/libexec/gnubin/date +%s%N | sed 's/........$//') % 16777216)))"
+#command: "echo '#'$(printf '%06x\n' $(( $(/usr/local/opt/coreutils/libexec/gnubin/date +%s%N | sed 's/........$//') % 16777216)))"
 
 
 # Refreshes every 100 miliseconds / tenth of a second.
